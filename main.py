@@ -6,6 +6,7 @@ base_url = "http://192.168.1.254/api/v1"
 user = "sabar"
 password = "menanti"
 
+webex_url = "https://webexapis.com/v1/messages"
 accessToken = "Your Access Token"
 roomId = "Your Room ID"
 
