@@ -47,24 +47,24 @@ def get_network_issues():
     return output
 
 def onHTTPDone(status, data, replyHeader): 
-	if status == 200:
-		print("Pesan Network Issues sukses dikirim!")
-	else:
-		print("Pesan Network Issues gagal dikirim!")
+    if status == 200:
+        print("Pesan Network Issues sukses dikirim!")
+    else:
+        print("Pesan Network Issues gagal dikirim!")
 
 def escape_underscore(txt):
-        return txt.replace("_", "-")
+    return txt.replace("_", "-")
         
 if __name__ == "__main__":
-	network_health = get_network_health()
-	if int(network_health) < 100:
-		issues = get_network_issues()
-		print(issues)
-		http = realhttp.RealHTTPClient()
+    network_health = get_network_health()
+    if int(network_health) < 100:
+        issues = get_network_issues()
+        print(issues)
+        http = realhttp.RealHTTPClient()
         
-        #headers = {"Authorization":"Bearer "+accessToken, "Content-Type":"application/json"}
-        #message = {"roomId":roomId, "markdown":'**Permasalahan Jaringan :**'+'\n'+ '>'+ issues}
-        #http.postWithHeader(webex_url, message, headers)
+        # headers = {"Authorization":"Bearer "+accessToken, "Content-Type":"application/json"}
+        # message = {"roomId":roomId, "markdown":'**Permasalahan Jaringan :**'+'\n'+ '>'+ issues}
+        # http.postWithHeader(webex_url, message, headers)
         
         issues = escape_underscore(issues)
         send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + issues
@@ -72,6 +72,6 @@ if __name__ == "__main__":
         
         http.onDone(onHTTPDone)
         while True:
-			sleep(5)
-	else:
-		print("Persentase Network Health: "+ network_health +"%")
+            sleep(5)
+    else:
+        print("Persentase Network Health: "+ network_health +"%")
